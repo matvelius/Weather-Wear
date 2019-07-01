@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     @IBOutlet weak var tempLabel: UILabel!
     
@@ -39,7 +39,12 @@ extension ViewController: UISearchBarDelegate {
             return
         }
         
-        let urlString = "https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=\(textInput)"
+        
+        
+        let urlString = "https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=\(textInput.replacingOccurrences(of: " ", with: "%20"))"
+        
+        
+        
         var locationName: String?
         var temperature: Double?
         
@@ -75,7 +80,7 @@ extension ViewController: UISearchBarDelegate {
                 }
                 
                 DispatchQueue.main.async {
-                    self.cityLabel.text = locationName
+                    self.locationLabel.text = locationName
                     self.tempLabel.text = String(temperature!)
                 }
                 
