@@ -40,16 +40,13 @@ extension ViewController: UISearchBarDelegate {
         }
         
         
-        
         let urlString = "https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=\(textInput.replacingOccurrences(of: " ", with: "%20"))"
-        
         
         
         var locationName: String?
         var temperature: Double?
         
         print(urlString)
-        
         
         
         guard let url = URL.init(string: urlString) else {
@@ -75,14 +72,18 @@ extension ViewController: UISearchBarDelegate {
                 
                 if let current = json["current"] {
                     temperature = current["temp_c"] as? Double
+//                    temperature.append(" °C")
+                    
+                    DispatchQueue.main.async {
+                        self.locationLabel.text = locationName
+                        self.tempLabel.text = String(Int(round(temperature!))) + "°C"
+                    }
+                    
                 } else {
                      print("unable to parse temperature")
                 }
                 
-                DispatchQueue.main.async {
-                    self.locationLabel.text = locationName
-                    self.tempLabel.text = String(temperature!)
-                }
+                
                 
             }
             catch let jsonError {
