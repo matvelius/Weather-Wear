@@ -18,25 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="City or Zip" translatesAutoresizingMaskIntoConstraints="NO" id="zsg-Qo-bcu">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kenrick-mills-1h2Pg97SXfA-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="IRy-f4-v6W">
+                                <rect key="frame" x="0.0" y="0.0" width="320.00000000000182" height="568"/>
+                            </imageView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="City or Zip" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsg-Qo-bcu">
                                 <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="D9Q-i4-Jdy">
+                                <rect key="frame" x="0.0" y="76" width="320" height="111"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="uiY-jV-6yP">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="61"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sd9-6A-aIw">
+                                        <rect key="frame" x="0.0" y="91" width="320" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="D9Q-i4-Jdy" firstAttribute="top" secondItem="zsg-Qo-bcu" secondAttribute="bottom" id="CAD-Po-2rd"/>
+                            <constraint firstItem="D9Q-i4-Jdy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="E5c-N4-1hW"/>
+                            <constraint firstAttribute="trailing" secondItem="IRy-f4-v6W" secondAttribute="trailing" id="INo-pQ-N4C"/>
+                            <constraint firstAttribute="bottom" secondItem="IRy-f4-v6W" secondAttribute="bottom" id="KPg-Dm-aO8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D9Q-i4-Jdy" secondAttribute="trailing" id="Swm-DM-B3h"/>
                             <constraint firstItem="zsg-Qo-bcu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XuX-RX-Fgg"/>
+                            <constraint firstItem="IRy-f4-v6W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="a37-dn-sCM"/>
+                            <constraint firstItem="IRy-f4-v6W" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="esF-aQ-77e"/>
                             <constraint firstItem="zsg-Qo-bcu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gXO-Rq-a4L"/>
                             <constraint firstAttribute="trailing" secondItem="zsg-Qo-bcu" secondAttribute="trailing" id="jnq-YN-Kvy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cityLabel" destination="uiY-jV-6yP" id="WUA-T3-vbX"/>
                         <outlet property="searchBar" destination="zsg-Qo-bcu" id="qza-xr-RK5"/>
+                        <outlet property="tempLabel" destination="Sd9-6A-aIw" id="Ml4-23-wLR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="kenrick-mills-1h2Pg97SXfA-unsplash" width="8165" height="12247"/>
+    </resources>
 </document>

@@ -20,6 +20,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var cityLabel: UILabel!
+    
+    @IBOutlet weak var tempLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
@@ -41,31 +45,54 @@ extension ViewController: UISearchBarDelegate {
         
         print(urlString)
         
-        if let url = URL.init(string: urlString) {
         
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        guard let url = URL.init(string: urlString) else {
+            print("unable to parse URL")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            guard let dataReceived = data else {
+                print("didn't receive deta")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: dataReceived, options: .mutableContainers) as! [String: AnyObject]
                 
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject]
-                    
-                    if let location = json["location"] {
-                        locationName = location["name"] as? String
-                    }
-                    
-                    if let current = json["current"] {
-                        temperature = current["temp_c"] as? Double
-                    }
+                if let location = json["location"] {
+                    locationName = location["name"] as? String
+                } else {
+                    print("unable to parse location")
                 }
-                catch let jsonError {
-                    print(jsonError)
+                
+                if let current = json["current"] {
+                    temperature = current["temp_c"] as? Double
+                } else {
+                     print("unable to parse temperature")
+                }
+                
+                DispatchQueue.main.async {
+                    self.cityLabel.text = locationName
+                    self.tempLabel.text = String(temperature!)
                 }
                 
             }
-            print(url)
+            catch let jsonError {
+                print(jsonError)
+            }
             
-            task.resume()
         }
+        
+        print(url)
+        
+        task.resume()
+        
     }
     
-    
 }
+    
+    
+
