@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xa0-lg-Thm">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Places View Controller-->
+        <scene sceneID="AG9-Zr-mOF">
+            <objects>
+                <viewController id="xa0-lg-Thm" customClass="PlacesViewController" customModule="Weather_for_Dummies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="74l-sz-xY7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4JH-d6-8G4"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qub-At-njq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1755" y="-11"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -73,6 +88,47 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="LDn-tr-w6e">
+            <objects>
+                <viewController id="Xgs-NX-YnG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D8m-4Y-GND">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfY-Bq-ea0">
+                                <rect key="frame" x="0.0" y="87" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="Xgs-NX-YnG" id="LNX-jB-1uK"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JhU-7l-nxp"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="EDo-4k-pkz" id="8fe-PK-pQM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T12-jM-MrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="EDo-4k-pkz">
+                    <connections>
+                        <outlet property="delegate" destination="Xgs-NX-YnG" id="xRp-bG-cnX"/>
+                        <outlet property="searchBar" destination="zfY-Bq-ea0" id="EYm-4L-QpW"/>
+                        <outlet property="searchContentsController" destination="Xgs-NX-YnG" id="W4x-o9-Ele"/>
+                        <outlet property="searchResultsDataSource" destination="Xgs-NX-YnG" id="s9m-IQ-J0n"/>
+                        <outlet property="searchResultsDelegate" destination="Xgs-NX-YnG" id="zUi-MX-4vW"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="943" y="51"/>
         </scene>
     </scenes>
     <resources>

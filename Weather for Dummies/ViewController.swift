@@ -33,6 +33,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        // https://api.apixu.com/v1/search.json?key=f19bd582e9a142e4baa155854193006&q=Chica
+        
+        
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let textInput = searchBar.text else {
             print("not text")
