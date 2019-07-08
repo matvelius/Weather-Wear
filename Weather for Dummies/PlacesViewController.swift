@@ -3,9 +3,16 @@ import GooglePlaces
 
 class PlacesViewController: UIViewController {
     
+    
+    @IBOutlet weak var locationNameLabel: UILabel!
+    @IBOutlet weak var currentTemperatureLabel: UILabel!
+    
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
+    
+    var locationName: String?
+    var temperature: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,8 @@ class PlacesViewController: UIViewController {
         searchController?.searchBar.sizeToFit()
         searchController?.hidesNavigationBarDuringPresentation = false
         
+        searchController?.searchBar.searchBarStyle = .minimal
+        
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
         definesPresentationContext = true
@@ -40,6 +49,9 @@ var places = [GMSPlace]()
 
 // Handle the user's selection.
 extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
+    
+    
+    
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
@@ -88,8 +100,7 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
             return
         }
         
-        var locationName: String?
-        var temperature: Double?
+        
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
 
@@ -102,18 +113,18 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
                 let json = try JSONSerialization.jsonObject(with: dataReceived, options: .mutableContainers) as! [String: AnyObject]
 
                 if let location = json["location"] {
-                    locationName = location["name"] as? String
+                    self.locationName = location["name"] as? String
                 } else {
                     print("unable to parse location")
                 }
 
                 if let current = json["current"] {
-                    temperature = current["temp_c"] as? Double
+                    self.temperature = current["temp_c"] as? Double
                     //                    temperature.append(" °C")
 
                     DispatchQueue.main.async {
-                        print(temperature!)
-//                        updateUI()
+                        print(self.temperature!)
+                        self.updateUI()
 //                        self.locationLabel.text = locationName
 //                        self.tempLabel.text = String(Int(round(temperature!))) + "°C"
                     }
@@ -199,5 +210,9 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
 //        task.resume()
 //
 //    }
+    func updateUI() {
+        self.locationNameLabel.text = locationName
+        self.currentTemperatureLabel.text = "Right now: " + String(Int(round(temperature!))) + "°C"
+    }
 //
 }
