@@ -13,6 +13,11 @@ class PlacesViewController: UIViewController {
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
         
+        // Specify a filter.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .geocode        
+        resultsViewController?.autocompleteFilter = filter
+        
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         
