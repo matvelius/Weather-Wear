@@ -14,6 +14,7 @@ class PlacesViewController: UIViewController {
     var locationName: String?
     var temperature: Double?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +121,25 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
 
                 if let current = json["current"] {
                     self.temperature = current["temp_c"] as? Double
+                    
+                    self.getConditionImageFromJSON(current)
+                    
+//                    var conditionIconURL: String?
+                    
+//                    var currentCondition: [String: Any] = current["condition"]
+//
+//                    var currentConditionImageURLString = currentCondition["icon"]?
+//
+//                    guard let currentConditionImageURL = URL.init(string: currentConditionImageURLString) else {
+//                        print("unable to parse URL")
+//                        return
+//                    }
+                    
+                    
+                    
+                    
+                    
+                    
                     //                    temperature.append(" °C")
 
                     DispatchQueue.main.async {
@@ -143,6 +163,42 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
         }
         
         task.resume()
+        
+    }
+    
+    func getConditionImageFromJSON(_ current: AnyObject) {
+//        print(current["condition"])
+        
+        guard let currentCondition = current["condition"] as! [String: Any]?
+            else { print("cannot get current condition")
+                return
+        }
+        
+        print(currentCondition)
+        
+        guard let currentConditionIconURLText: String = "https:" + (currentCondition["icon"] as! String)
+            else { print("cannot get current condition URL text")
+                return
+        }
+        
+        guard let currentConditionIconURLRequest: URLRequest = URLRequest(url: URL(string: currentConditionIconURLText)!)
+            else { print("cannot get create URL request")
+                return
+        }
+        
+        let currentConditionIconTask = URLSession.shared.dataTask(with: currentConditionIconURLRequest) { (data, response, error) in
+            
+            guard let dataReceived = data else {
+                print("didn't receive deta")
+                return
+            }
+            
+            print(dataReceived)
+            
+        
+        }
+        
+        currentConditionIconTask.resume()
         
     }
     
