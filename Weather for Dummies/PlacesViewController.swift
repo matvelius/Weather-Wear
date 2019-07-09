@@ -15,6 +15,7 @@ class PlacesViewController: UIViewController {
     
     var locationName: String?
     var temperature: Double?
+    var precipitation: Double?
     
     
     override func viewDidLoad() {
@@ -123,26 +124,9 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
 
                 if let current = json["current"] {
                     self.temperature = current["temp_c"] as? Double
+                    self.precipitation = current["precip_mm"] as? Double
                     
                     self.getConditionImageFromJSON(current)
-                    
-//                    var conditionIconURL: String?
-                    
-//                    var currentCondition: [String: Any] = current["condition"]
-//
-//                    var currentConditionImageURLString = currentCondition["icon"]?
-//
-//                    guard let currentConditionImageURL = URL.init(string: currentConditionImageURLString) else {
-//                        print("unable to parse URL")
-//                        return
-//                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    //                    temperature.append(" °C")
 
                     DispatchQueue.main.async {
                         print(self.temperature!)
@@ -194,91 +178,29 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
         
         self.weatherImageView.load(url: currentConditionIconURL)
         
-//        let currentConditionIconTask = URLSession.shared.dataTask(with: currentConditionIconURLRequest) { (data, response, error) in
-//
-//            guard let dataReceived = data else {
-//                print("didn't receive deta")
-//                return
-//            }
-//
-//
-//
-//            print(dataReceived)
-//
-//
-//        }
-//
-//        currentConditionIconTask.resume()
-        
     }
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let textInput = searchBar.text else {
-//            print("not text")
-//            return
-//        }
-//
-//
-//        let urlString = "https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=\(textInput.replacingOccurrences(of: " ", with: "%20"))"
-//
-//
-//        var locationName: String?
-//        var temperature: Double?
-//
-//        print(urlString)
-//
-//
-//        guard let url = URL.init(string: urlString) else {
-//            print("unable to parse URL")
-//            return
-//        }
-//
-//        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-//
-//            guard let dataReceived = data else {
-//                print("didn't receive deta")
-//                return
-//            }
-//
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: dataReceived, options: .mutableContainers) as! [String: AnyObject]
-//
-//                if let location = json["location"] {
-//                    locationName = location["name"] as? String
-//                } else {
-//                    print("unable to parse location")
-//                }
-//
-//                if let current = json["current"] {
-//                    temperature = current["temp_c"] as? Double
-//                    //                    temperature.append(" °C")
-//
-//                    DispatchQueue.main.async {
-//                        self.locationLabel.text = locationName
-//                        self.tempLabel.text = String(Int(round(temperature!))) + "°C"
-//                    }
-//
-//                } else {
-//                    print("unable to parse temperature")
-//                }
-//
-//
-//
-//            }
-//            catch let jsonError {
-//                print(jsonError)
-//            }
-//
-//        }
-//
-//        print(url)
-//
-//        task.resume()
-//
-//    }
+  
     func updateUI() {
         self.locationNameLabel.text = locationName
-        self.currentTemperatureLabel.text = "Right now: " + String(Int(round(temperature!))) + "°C"
+        self.currentTemperatureLabel.text = String(Int(round(temperature!))) + "°C"
+        
+        if let currentPrecipitation = precipitation {
+            switch currentPrecipitation {
+                
+            case 0.0...2.5:
+                print("light rain")
+            case 2.5..<7.6:
+                print("moderate rain")
+            case 7.6..<50:
+                print("heavy rain")
+            case 50...:
+                print("violent rain")
+            default:
+                print("hmm")
+            }
+        }
+        
+        
     }
 //
 }
