@@ -7,6 +7,8 @@ class PlacesViewController: UIViewController {
     @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     
+    @IBOutlet weak var weatherImageView: UIImageView!
+    
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
@@ -181,24 +183,32 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
                 return
         }
         
-        guard let currentConditionIconURLRequest: URLRequest = URLRequest(url: URL(string: currentConditionIconURLText)!)
-            else { print("cannot get create URL request")
+//        guard let currentConditionIconURLRequest: URLRequest = URLRequest(url: URL(string: currentConditionIconURLText)!)
+//            else { print("cannot get create URL request")
+//                return
+//        }
+        guard let currentConditionIconURL = URL(string: currentConditionIconURLText)
+            else { print("cannot get URL")
                 return
         }
         
-        let currentConditionIconTask = URLSession.shared.dataTask(with: currentConditionIconURLRequest) { (data, response, error) in
-            
-            guard let dataReceived = data else {
-                print("didn't receive deta")
-                return
-            }
-            
-            print(dataReceived)
-            
+        self.weatherImageView.load(url: currentConditionIconURL)
         
-        }
-        
-        currentConditionIconTask.resume()
+//        let currentConditionIconTask = URLSession.shared.dataTask(with: currentConditionIconURLRequest) { (data, response, error) in
+//
+//            guard let dataReceived = data else {
+//                print("didn't receive deta")
+//                return
+//            }
+//
+//
+//
+//            print(dataReceived)
+//
+//
+//        }
+//
+//        currentConditionIconTask.resume()
         
     }
     

@@ -15,6 +15,7 @@
 		D72F455E22C912D100226C3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72F455C22C912D100226C3A /* LaunchScreen.storyboard */; };
 		D748355A22CB0B6800562EDA /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748355922CB0B6800562EDA /* PlacesViewController.swift */; };
 		D769E05A22D2ED5700AF70BB /* GooglePlacesAPIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769E05922D2ED5700AF70BB /* GooglePlacesAPIKey.swift */; };
+		D769E05C22D4123B00AF70BB /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769E05B22D4123A00AF70BB /* LoadImage.swift */; };
 		F0970F5AA08BE69323825EA7 /* libPods-Weather for Dummies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE86315320A046033B1B119 /* libPods-Weather for Dummies.a */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		D72F455F22C912D100226C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D748355922CB0B6800562EDA /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		D769E05922D2ED5700AF70BB /* GooglePlacesAPIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesAPIKey.swift; sourceTree = "<group>"; };
+		D769E05B22D4123A00AF70BB /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				D769E05922D2ED5700AF70BB /* GooglePlacesAPIKey.swift */,
 				D72F455522C912CE00226C3A /* ViewController.swift */,
 				D72F455722C912CE00226C3A /* Main.storyboard */,
+				D769E05B22D4123A00AF70BB /* LoadImage.swift */,
 				D748355922CB0B6800562EDA /* PlacesViewController.swift */,
 				D72F455A22C912D100226C3A /* Assets.xcassets */,
 				D72F455C22C912D100226C3A /* LaunchScreen.storyboard */,
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D748355A22CB0B6800562EDA /* PlacesViewController.swift in Sources */,
+				D769E05C22D4123B00AF70BB /* LoadImage.swift in Sources */,
 				D72F455622C912CE00226C3A /* ViewController.swift in Sources */,
 				D72F455422C912CE00226C3A /* AppDelegate.swift in Sources */,
 				D769E05A22D2ED5700AF70BB /* GooglePlacesAPIKey.swift in Sources */,
