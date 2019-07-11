@@ -127,6 +127,8 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
                     self.precipitation = current["precip_mm"] as? Double
                     
                     self.getConditionImageFromJSON(current)
+                    
+                    evaluateWeather(currentTemperature: self.temperature, currentPrecipitation: self.precipitation)
 
                     DispatchQueue.main.async {
                         print(self.temperature!)
@@ -184,21 +186,7 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
         self.locationNameLabel.text = locationName
         self.currentTemperatureLabel.text = String(Int(round(temperature!))) + "°C"
         
-        if let currentPrecipitation = precipitation {
-            switch currentPrecipitation {
-                
-            case 0.0...2.5:
-                print("light rain")
-            case 2.5..<7.6:
-                print("moderate rain")
-            case 7.6..<50:
-                print("heavy rain")
-            case 50...:
-                print("violent rain")
-            default:
-                print("hmm")
-            }
-        }
+        
         
         
     }
