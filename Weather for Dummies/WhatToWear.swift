@@ -26,53 +26,76 @@ let precipitationAndHumidity = ["dry, ", "humid, ", "foggy, ", "raining, ", "pou
 
 let windyOrNot = ["and not windy.", "and windy."]
 
-func evaluateWeather(currentTemperature: Double?, currentPrecipitation: Double?) {
+// Sample output: "It is cold, raining, and windy. Bring a coat or an umbrella, and wear at least 3 layers."
+
+var beginningOfPhrase = ""
+var middleOfPhrase = ""
+var endOfPhrase = ""
+
+var outputPhrase = ""
+
+
+func evaluateWeather(currentTemperature: Double?, currentPrecipitation: Double?, currentHumidity: Int?) {
     
     guard let currentTemperature = currentTemperature else { return }
     guard let currentPrecipitation = currentPrecipitation else { return }
+    guard let currentHumidity = currentHumidity else { return }
     
     print("currentTemperature: \(currentTemperature)")
     print("currentPrecipitation: \(currentPrecipitation)")
+    print("currentHumidity: \(currentHumidity)")
     
     switch currentTemperature {
     case ..<(-30):
-        print("dangerously cold")
+        outputPhrase = hotOrCold[hotOrCold.count - 1]
     case -20..<(-20):
-        print("freezing")
+        outputPhrase = hotOrCold[hotOrCold.count - 2]
     case -20..<(-10):
-        print("really cold")
+        outputPhrase = hotOrCold[hotOrCold.count - 3]
     case -10..<0:
-        print("very cold")
+        outputPhrase = hotOrCold[hotOrCold.count - 4]
     case 0..<8:
-        print("cold")
+        outputPhrase = hotOrCold[hotOrCold.count - 5]
     case 8..<16:
-        print("chilly")
+        outputPhrase = hotOrCold[hotOrCold.count - 6]
     case 16..<25:
-        print("warm")
+        outputPhrase = hotOrCold[hotOrCold.count - 7]
     case 25..<28:
-        print("pretty warm")
+        outputPhrase = hotOrCold[hotOrCold.count - 8]
     case 28..<35:
-        print("hot")
+        outputPhrase = hotOrCold[hotOrCold.count - 9]
     case 35..<42:
-        print("very hot")
+        outputPhrase = hotOrCold[hotOrCold.count - 10]
     case 42...:
-        print("extremely hot")
+        outputPhrase = hotOrCold[hotOrCold.count - 11]
     default:
         print("what's going on?")
     }
     
+    if currentPrecipitation == 0 {
     
-    switch currentPrecipitation {
-    case 0.0...2.5:
-        print("light rain")
-    case 2.5..<7.6:
-        print("moderate rain")
-    case 7.6..<50:
-        print("heavy rain")
-    case 50...:
-        print("violent rain")
-    default:
-        print("hmm")
+        switch currentHumidity {
+        case 0:
+            outputPhrase.append(precipitationAndHumidity[0])
+        default:
+            outputPhrase.append(precipitationAndHumidity[1])
+        }
+        
+    } else {
+    
+        switch currentPrecipitation {
+        case 0.1..<2.5:
+            
+            print("light rain")
+        case 2.5..<7.6:
+            print("moderate rain")
+        case 7.6..<50:
+            print("heavy rain")
+        case 50...:
+            print("violent rain")
+        default:
+            print("hmm")
+        }
     }
     
     

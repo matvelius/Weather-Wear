@@ -6,13 +6,6 @@
 //  Copyright © 2019 Matvey. All rights reserved.
 //
 
-// CURRENT WEATHER
-// https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=Paris
-
-// FORECAST
-// https://api.apixu.com/v1/forecast.json?key=f19bd582e9a142e4baa155854193006&q=Paris
-
-
 
 import UIKit
 
@@ -33,11 +26,10 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        // https://api.apixu.com/v1/search.json?key=f19bd582e9a142e4baa155854193006&q=Chica
-        
-        
-    }
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//
+//
+//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let textInput = searchBar.text else {
@@ -46,7 +38,7 @@ extension ViewController: UISearchBarDelegate {
         }
         
         
-        let urlString = "https://api.apixu.com/v1/current.json?key=f19bd582e9a142e4baa155854193006&q=\(textInput.replacingOccurrences(of: " ", with: "%20"))"
+        let urlString = "https://api.apixu.com/v1/current.json?key=\(apixuAPIKey)&q=\(textInput.replacingOccurrences(of: " ", with: "%20"))"
         
         
         var locationName: String?
