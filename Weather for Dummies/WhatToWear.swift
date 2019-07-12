@@ -35,7 +35,7 @@ var endOfPhrase = ""
 var outputPhrase = ""
 
 
-func evaluateWeather(currentTemperature: Double?, currentPrecipitation: Double?, currentHumidity: Int?) {
+func evaluateWeather(currentTemperature: Double?, currentPrecipitation: Double?, currentHumidity: Int?, currentPrecipProbability: Double?) {
     
     guard let currentTemperature = currentTemperature else { return }
     guard let currentPrecipitation = currentPrecipitation else { return }

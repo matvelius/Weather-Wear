@@ -51,15 +51,8 @@ extension PlacesViewController {
                     self.humidity = apixuCurrent["humidity"] as? Int
                     
                     self.getConditionImageFromJSON(apixuCurrent)
-                    
-                    evaluateWeather(currentTemperature: self.temperature, currentPrecipitation: self.precipitation, currentHumidity: self.humidity)
-                    
-                    DispatchQueue.main.async {
-                        print(self.temperature!)
-                        self.updateUI()
-                    }
-                    
-                } else { print("unable to parse temperature") }
+ 
+                } else { print("unable to parse current weather from apiXU") }
                 
             } // end do
                 
@@ -96,11 +89,23 @@ extension PlacesViewController {
 //                                try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 let darkskyJSON = try JSONSerialization.jsonObject(with: dataReceived, options: []) as! [String: AnyObject]
                 
-                guard let darkskyCurrent = darkskyJSON["currently"] else { return }
-                guard let dewPoint = darkskyCurrent["dewPoint"] else { return }
-                
-                print(dewPoint)
-                
+                if let darkskyCurrent = darkskyJSON["daily"] {
+                    //                guard let dewPoint = darkskyCurrent["dewPoint"] else { return }
+                    guard let darkskyCurrentData = darkskyCurrent["data"] as? [[String: AnyObject]] else {
+                        print("unable to fetch darkskyCurrentData")
+                        return
+                    }
+                    self.precipProbability = darkskyCurrentData[0]["precipProbability"] as? Double
+                    
+                    evaluateWeather(currentTemperature: self.temperature, currentPrecipitation: self.precipitation, currentHumidity: self.humidity, currentPrecipProbability: self.precipProbability)
+                    
+                    DispatchQueue.main.async {
+                        self.updateUI()
+                    }
+                    
+                } else { print("unable to parse current weather from darkSky") }
+
+          
             }
             
             catch let jsonError {

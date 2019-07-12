@@ -17,6 +17,7 @@ class PlacesViewController: UIViewController {
     var temperature: Double?
     var precipitation: Double?
     var humidity: Int?
+    var precipProbability: Double?
     
     
     override func viewDidLoad() {
@@ -55,8 +56,7 @@ var places = [GMSPlace]()
 // Handle the user's selection.
 extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
     
-    
-    
+
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = false
