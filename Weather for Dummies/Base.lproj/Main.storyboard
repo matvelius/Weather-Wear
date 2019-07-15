@@ -21,8 +21,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kenrick-mills-1h2Pg97SXfA-unsplash" translatesAutoresizingMaskIntoConstraints="NO" id="b80-r5-Y9r">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Fcs-wA-eSV">
-                                <rect key="frame" x="88" y="206" width="144" height="156"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Fcs-wA-eSV" userLabel="Main Content">
+                                <rect key="frame" x="88" y="186.5" width="144" height="195.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PRK-5b-bBa">
                                         <rect key="frame" x="23.5" y="0.0" width="97.5" height="73"/>
@@ -52,6 +52,12 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dug-Dh-COJ">
+                                        <rect key="frame" x="52" y="175" width="40" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -69,7 +75,9 @@
                     <connections>
                         <outlet property="currentTemperatureLabel" destination="iIp-uh-v72" id="ZLt-TC-mCg"/>
                         <outlet property="locationNameLabel" destination="PRK-5b-bBa" id="ru2-51-wuT"/>
+                        <outlet property="mainContentStack" destination="Fcs-wA-eSV" id="jCE-Zo-13O"/>
                         <outlet property="weatherImageView" destination="SUZ-F2-lWm" id="yPQ-IM-A1D"/>
+                        <outlet property="whatToWearLabel" destination="dug-Dh-COJ" id="5RJ-w4-box"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qub-At-njq" userLabel="First Responder" sceneMemberID="firstResponder"/>

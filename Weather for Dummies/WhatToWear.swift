@@ -20,11 +20,10 @@ var wearGloves = false
 
 var numberOfLayers = 1
 
-let hotOrCold = ["It is extremely hot ", "It is very hot ", "It is hot, ", "It is pretty warm, ", "It is warm, ", "It is chilly, ", "It is cold, ", "It is very cold", "It is really cold", "It is freezing, ", "It is dangerously cold, "]
 
 let precipitationAndHumidity = ["dry, ", "humid, ", "foggy, ", "raining, ", "pouring, ", "snowing, ", "hailing, "]
 
-let windyOrNot = ["and not windy.", "and windy."]
+//let windyOrNot = ["and not windy.", "and windy."]
 
 // Sample output: "It is cold, raining, and windy. Bring a coat or an umbrella, and wear at least 3 layers."
 
@@ -41,7 +40,8 @@ func evaluateWeather(
     currentPrecipProbability: Double?,
     currentDewPoint: Double?,
     currentPrecipType: String?,
-    currentVisibility: Double?
+    currentVisibility: Double?,
+    darkskyIconName: String?
     ) {
     
     resetParameters()
@@ -53,6 +53,7 @@ func evaluateWeather(
     guard let currentDewPoint = currentDewPoint else { return }
     guard let currentVisibility = currentVisibility else { return }
     let currentPrecipType: String = currentPrecipType ?? "n/a"
+    let darkskyIconName: String = darkskyIconName ?? "clear-day"
     
     let differenceBetweenCurrentTemperatureAndDewPoint = currentTemperature - currentDewPoint
     
@@ -65,46 +66,59 @@ func evaluateWeather(
     print("currentPrecipType: \(currentPrecipType)")
     print("currentVisibility: \(currentVisibility)")
 
+//    let hotOrCold = ["It is extremely hot, ", "It is very hot, ", "It is hot, ", "It is pretty warm, ", "It is warm, ", "It is chilly, ", "It is cold, ", "It is very cold, ", "It is really cold, ", "It is freezing, ", "It is dangerously cold, "]
+
+    // TEMPERATURE
     
     switch currentTemperature {
     case ..<(-30):
-        outputPhrase = hotOrCold[hotOrCold.count - 1]
+        outputPhrase = "It is dangerously cold, "
         numberOfLayers = 4
         dangerouslyCold = true
-    case -20..<(-20):
-        outputPhrase = hotOrCold[hotOrCold.count - 2]
+    case -200..<(-20):
+        outputPhrase = "It is freezing, "
         numberOfLayers = 4
     case -20..<(-10):
-        outputPhrase = hotOrCold[hotOrCold.count - 3]
+        outputPhrase = "It is really cold, "
         numberOfLayers = 3
     case -10..<0:
-        outputPhrase = hotOrCold[hotOrCold.count - 4]
+        outputPhrase = "It is very cold, "
         numberOfLayers = 3
     case 0..<8:
-        outputPhrase = hotOrCold[hotOrCold.count - 5]
+        outputPhrase = "It is cold, "
         numberOfLayers = 3
     case 8..<16:
-        outputPhrase = hotOrCold[hotOrCold.count - 6]
+        outputPhrase = "It is chilly, "
         numberOfLayers = 2
-    case 16..<25:
-        outputPhrase = hotOrCold[hotOrCold.count - 7]
+    case 16..<20:
+        outputPhrase = "It is nice out, "
         numberOfLayers = 1
-    case 25..<28:
-        outputPhrase = hotOrCold[hotOrCold.count - 8]
+    case 20..<25:
+        outputPhrase = "It is warm, "
         numberOfLayers = 1
-    case 28..<35:
-        outputPhrase = hotOrCold[hotOrCold.count - 9]
+    case 25..<30:
+        outputPhrase = "It is hot, "
         numberOfLayers = 1
-    case 35..<42:
-        outputPhrase = hotOrCold[hotOrCold.count - 10]
+    case 30..<35:
+        outputPhrase = "It is very hot, "
         numberOfLayers = 1
-    case 42...:
-        outputPhrase = hotOrCold[hotOrCold.count - 11]
+        
+        if darkskyIconName == "clear-day" {
+            wearHat = true
+        }
+    case 35...:
+        outputPhrase = "It is extremely hot, "
         numberOfLayers = 1
+        
         dangerouslyHot = true
+        if darkskyIconName == "clear-day" {
+            wearHat = true
+        }
     default:
         print("something wrong with the temperature")
     }
+    
+    // HUMIDITY
     
     // no precipitation, just evaluate humidity
     if currentPrecipitation == 0 && currentPrecipitationProbability < 0.1 {
@@ -112,46 +126,58 @@ func evaluateWeather(
         switch currentHumidity {
         // dry when humidity is less than 30%
         case ..<30:
-            outputPhrase.append(precipitationAndHumidity[0])
+            middleOfPhrase = "dry, "
         // humid when temp & dew point are high enough, and there's no precipitation
-        case 50... where currentTemperature > 16 && currentPrecipitation < 0.1 && currentDewPoint > 16:
-            outputPhrase.append(precipitationAndHumidity[1])
+        case 50..<99 where currentTemperature > 16 && currentPrecipitation < 0.1 && currentDewPoint > 16:
+            middleOfPhrase = "humid, "
+        case 99... where currentTemperature > 16 && currentPrecipitation < 0.1 && currentDewPoint > 16:
+            middleOfPhrase = "foggy, "
         default: break
         }
     
     // deal with precipitation
     } else {
         
+        numberOfLayers += 1
+        
+        // RAIN
+        
         if currentPrecipType == "rain" {
     
             switch currentPrecipitation {
             case 0.1..<2.5:
-                print("light rain")
+                middleOfPhrase = "raining a little, "
             case 2.5..<7.6:
-                print("moderate rain")
+                middleOfPhrase = "raining, "
             case 7.6..<50:
-                print("heavy rain")
+                middleOfPhrase = "pouring, "
             case 50...:
-                print("violent rain")
+                middleOfPhrase = "rain violently, "
             default:
                 print("something wrong with rain")
             }
+            
+        // SNOW
         
         } else if currentPrecipType == "snow" {
             
             switch currentVisibility {
             case ..<0.4:
-                print("snowing heavily.")
+                middleOfPhrase = "snowing hevily, "
             case 0.4..<0.8:
-                print("snowing.")
+                middleOfPhrase = "snowing, "
             case 0.8...:
-                print("snowing a bit.")
+                middleOfPhrase = "snowing a little bit, "
             default:
                 print("something wrong with snow")
             }
             
         }
+        
+        outputPhrase.append(middleOfPhrase)
     }
+    
+    // WIND
     
     
 }

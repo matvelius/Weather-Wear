@@ -143,6 +143,7 @@ extension PlacesViewController {
                     self.dewPoint = darkskyCurrentData[0]["dewPoint"] as? Double
                     self.precipType = darkskyCurrentData[0]["precipType"] as? String
                     self.visibility = darkskyCurrentData[0]["visibility"] as? Double
+                    self.darkskyIconName = darkskyCurrentData[0]["icon"] as? String
                     
                     evaluateWeather(
                         currentTemperature: self.temperature,
@@ -151,7 +152,8 @@ extension PlacesViewController {
                         currentPrecipProbability: self.precipProbability,
                         currentDewPoint: self.dewPoint,
                         currentPrecipType: self.precipType,
-                        currentVisibility: self.visibility
+                        currentVisibility: self.visibility,
+                        darkskyIconName: self.darkskyIconName
                     )
                     
                     DispatchQueue.main.async {

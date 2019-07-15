@@ -9,6 +9,10 @@ class PlacesViewController: UIViewController {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     
+    @IBOutlet weak var whatToWearLabel: UILabel!
+    
+    @IBOutlet weak var mainContentStack: UIStackView!
+    
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
@@ -20,7 +24,8 @@ class PlacesViewController: UIViewController {
     var precipProbability: Double?
     var dewPoint: Double?
     var precipType: String?
-    var visibility: Double? 
+    var visibility: Double?
+    var darkskyIconName: String?
     
     
     override func viewDidLoad() {
@@ -51,6 +56,11 @@ class PlacesViewController: UIViewController {
         definesPresentationContext = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        mainContentStack.alpha = 0
+    }
+    
+    
     
 }
 
@@ -68,7 +78,10 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
         print("Place address: \(place.formattedAddress)")
         print("Place attributions: \(place.attributions)")
         
+        mainContentStack.alpha = 0
+        
         savePlace(place)
+
         getWeatherForPlace(place)
         
     }
@@ -93,7 +106,13 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
     func updateUI() {
         self.locationNameLabel.text = locationName
         self.currentTemperatureLabel.text = String(Int(round(temperature!))) + "°C"
- 
+        self.whatToWearLabel.text = outputPhrase
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn, animations: {
+            
+            self.mainContentStack.alpha = 1
+            
+        })
     }
 //
 }
