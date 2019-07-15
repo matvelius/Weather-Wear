@@ -14,10 +14,13 @@ class PlacesViewController: UIViewController {
     var resultView: UITextView?
     
     var locationName: String?
-    var temperature: Double?
+    var temperature: Double? = 0
     var precipitation: Double?
     var humidity: Int?
     var precipProbability: Double?
+    var dewPoint: Double?
+    var precipType: String?
+    var visibility: Double? 
     
     
     override func viewDidLoad() {

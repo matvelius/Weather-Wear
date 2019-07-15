@@ -21,14 +21,36 @@ extension PlacesViewController {
     //    https://api.darksky.net/forecast/API_KEY/37.8267,-122.4233
     
     func getWeatherForPlace(_ place: GMSPlace) {
-
+        
+        
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         
         let apixuURLString = "https://api.apixu.com/v1/current.json?key=\(apixuAPIKey)&q=\(place.name!.replacingOccurrences(of: " ", with: "%20"))"
         
         guard let apixuURL = URL.init(string: apixuURLString) else { print("unable to parse apixu URL")
             return
         }
-
+//        func fetchGenres(completion: @escaping (Result<[Genre], Error>) -> Void) {
+//            ...
+//                URLSession.shared.dataTask(with: request) { data, _, error in
+//                    if let error = error {
+//                        DispatchQueue.main.async {
+//                            completion(.failure(error))
+//                        }
+//                        return
+//                    }
+//
+//                    // parse response here
+//
+//                    let results = ...
+//                        DispatchQueue.main.async {
+//                            completion(.success(results))
+//                    }
+//                    }.resume()
+//        }
         
         let apixuAPITask = URLSession.shared.dataTask(with: apixuURL) { (data, response, error) in
             
@@ -54,7 +76,13 @@ extension PlacesViewController {
  
                 } else { print("unable to parse current weather from apiXU") }
                 
+                DispatchQueue.main.async {
+                    dispatchGroup.leave()
+                }
+                
             } // end do
+                
+                
                 
             catch let jsonError {
                 print(jsonError)
@@ -65,10 +93,11 @@ extension PlacesViewController {
         apixuAPITask.resume()
         
         
+        dispatchGroup.enter()
         
         // DARK SKY
         
-        let darkskyURLString = "https://api.darksky.net/forecast/\(darkSkyAPIKey)/\(place.coordinate.latitude),\(place.coordinate.longitude)"
+        let darkskyURLString = "https://api.darksky.net/forecast/\(darkSkyAPIKey)/\(place.coordinate.latitude),\(place.coordinate.longitude)?units=si"
         
         print(darkskyURLString)
         
@@ -80,6 +109,7 @@ extension PlacesViewController {
         
         
         let darkskyAPITask = URLSession.shared.dataTask(with: darkskyURL) { (data, response, error) in
+            
             guard let dataReceived = data else {
                 print("didn't receive deta")
                 return
@@ -95,12 +125,37 @@ extension PlacesViewController {
                         print("unable to fetch darkskyCurrentData")
                         return
                     }
-                    self.precipProbability = darkskyCurrentData[0]["precipProbability"] as? Double
                     
-                    evaluateWeather(currentTemperature: self.temperature, currentPrecipitation: self.precipitation, currentHumidity: self.humidity, currentPrecipProbability: self.precipProbability)
+                    if let location = darkskyCurrentData[0]["location"] {
+                        self.locationName = location["name"] as? String
+                    } else { print("unable to parse location") }
+                    
+//                    if let apixuCurrent = apixuJSON["current"] {
+//                    self.temperature = darkskyCurrentData[0]["temp_c"] as? Double
+//                    self.precipitation = darkskyCurrentData[0]["precip_mm"] as? Double
+//                    self.humidity = darkskyCurrentData[0]["humidity"] as? Int
+                    
+//                    self.getConditionImageFromJSON(apixuCurrent)
+                    
+//                    } else { print("unable to parse current weather from apiXU") }
+                    
+                    self.precipProbability = darkskyCurrentData[0]["precipProbability"] as? Double
+                    self.dewPoint = darkskyCurrentData[0]["dewPoint"] as? Double
+                    self.precipType = darkskyCurrentData[0]["precipType"] as? String
+                    self.visibility = darkskyCurrentData[0]["visibility"] as? Double
+                    
+                    evaluateWeather(
+                        currentTemperature: self.temperature,
+                        currentPrecipitation: self.precipitation,
+                        currentHumidity: self.humidity,
+                        currentPrecipProbability: self.precipProbability,
+                        currentDewPoint: self.dewPoint,
+                        currentPrecipType: self.precipType,
+                        currentVisibility: self.visibility
+                    )
                     
                     DispatchQueue.main.async {
-                        self.updateUI()
+                        dispatchGroup.leave()
                     }
                     
                 } else { print("unable to parse current weather from darkSky") }
@@ -118,6 +173,10 @@ extension PlacesViewController {
         }
         
         darkskyAPITask.resume()
+        
+        dispatchGroup.notify(queue: .main) {
+            self.updateUI()
+        }
         
     } // end task definition
     
