@@ -22,8 +22,6 @@ extension PlacesViewController {
     
     func getWeatherForPlace(_ place: GMSPlace) {
         
-        
-        
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
@@ -33,24 +31,6 @@ extension PlacesViewController {
         guard let apixuURL = URL.init(string: apixuURLString) else { print("unable to parse apixu URL")
             return
         }
-//        func fetchGenres(completion: @escaping (Result<[Genre], Error>) -> Void) {
-//            ...
-//                URLSession.shared.dataTask(with: request) { data, _, error in
-//                    if let error = error {
-//                        DispatchQueue.main.async {
-//                            completion(.failure(error))
-//                        }
-//                        return
-//                    }
-//
-//                    // parse response here
-//
-//                    let results = ...
-//                        DispatchQueue.main.async {
-//                            completion(.success(results))
-//                    }
-//                    }.resume()
-//        }
         
         let apixuAPITask = URLSession.shared.dataTask(with: apixuURL) { (data, response, error) in
             
