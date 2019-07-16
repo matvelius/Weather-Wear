@@ -74,8 +74,8 @@ class PlacesViewController: UIViewController {
         
         
 //        self.locationName = locationManager.location.
-        self.currentLocationLatitude = locationManager.location?.coordinate.latitude
-        self.currentLocationLatitude = locationManager.location?.coordinate.longitude
+//        self.currentLocationLatitude = locationManager.location?.coordinate.latitude
+//        self.currentLocationLatitude = locationManager.location?.coordinate.longitude
         
 //        print(self.currentLocationLatitude)
         
@@ -146,7 +146,7 @@ class PlacesViewController: UIViewController {
 //        }
 //    }
     
-    func retreiveCityName(latitude: Double, longitude: Double, completionHandler: @escaping (String?) -> Void)
+    func retrieveCityName(latitude: Double, longitude: Double, completionHandler: @escaping (String?) -> Void)
     {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude), completionHandler:
@@ -157,6 +157,13 @@ class PlacesViewController: UIViewController {
                 
                 
                 print(placeMarks?.first?.locality)
+                self.locationName = placeMarks?.first?.locality
+                self.currentLocationLatitude = placeMarks?.first?.location?.coordinate.latitude
+                self.currentLocationLongitude = placeMarks?.first?.location?.coordinate.longitude
+                
+                print("currentLocationLatitude: \(self.currentLocationLatitude), currentLocationLongitude: \(self.currentLocationLongitude)")
+                
+                self.getWeatherForPlace()
         })
     }
     
@@ -179,8 +186,12 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
         mainContentStack.alpha = 0
         
         savePlace(place)
+        
+        locationName = place.name
+        currentLocationLatitude = place.coordinate.latitude
+        currentLocationLongitude = place.coordinate.longitude
 
-        getWeatherForPlace(place)
+        getWeatherForPlace()
         
     }
     
@@ -224,7 +235,8 @@ extension PlacesViewController: CLLocationManagerDelegate {
         guard let locValue: CLLocationCoordinate2D = locationManager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
-        retreiveCityName(latitude: locValue.latitude, longitude: locValue.longitude, completionHandler: { _ in })
+        retrieveCityName(latitude: locValue.latitude, longitude: locValue.longitude, completionHandler: { _ in })
+        
         locationManager.stopUpdatingLocation()
     }
     

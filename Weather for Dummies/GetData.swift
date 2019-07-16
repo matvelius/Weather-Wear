@@ -12,7 +12,7 @@ import GooglePlaces
 extension PlacesViewController {
     
     func savePlace(_ place: GMSPlace) {
-        print(place.coordinate)
+//        print(place.coordinate)
         places.append(place)
     }
     
@@ -20,13 +20,15 @@ extension PlacesViewController {
     
     //    https://api.darksky.net/forecast/API_KEY/37.8267,-122.4233
     
-    func getWeatherForPlace(_ place: GMSPlace) {
+    func getWeatherForPlace() {
         
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
         
-        let apixuURLString = "https://api.apixu.com/v1/current.json?key=\(apixuAPIKey)&q=\(place.name!.replacingOccurrences(of: " ", with: "%20"))"
+        let apixuURLString = "https://api.apixu.com/v1/current.json?key=\(apixuAPIKey)&q=\(locationName!.replacingOccurrences(of: " ", with: "%20"))"
+        
+        print("apixuURLString: \(apixuURLString)")
         
         guard let apixuURL = URL.init(string: apixuURLString) else { print("unable to parse apixu URL")
             return
@@ -65,7 +67,7 @@ extension PlacesViewController {
                 
                 
             catch let jsonError {
-                print(jsonError)
+                print("jsonError: \(jsonError)")
             }
             
         }
@@ -77,15 +79,15 @@ extension PlacesViewController {
         
         // DARK SKY
         
-        let darkskyURLString = "https://api.darksky.net/forecast/\(darkSkyAPIKey)/\(place.coordinate.latitude),\(place.coordinate.longitude)?units=si"
+        let darkskyURLString = "https://api.darksky.net/forecast/\(darkSkyAPIKey)/\(currentLocationLatitude!),\(currentLocationLongitude!)?units=si"
         
-        print(darkskyURLString)
+        print("darkskyURLString: \(darkskyURLString)")
         
         guard let darkskyURL = URL.init(string: darkskyURLString) else { print("unable to parse darksky URL")
             return
         }
         
-        print(darkskyURL)
+        print("darkskyURL: \(darkskyURL)")
         
         
         let darkskyAPITask = URLSession.shared.dataTask(with: darkskyURL) { (data, response, error) in
@@ -146,7 +148,7 @@ extension PlacesViewController {
             }
             
             catch let jsonError {
-                print(jsonError)
+                print("jsonError: \(jsonError)")
             }
             
 //            catch let error as NSError {
