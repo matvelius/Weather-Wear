@@ -38,6 +38,8 @@ class PlacesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createActivityIndicatorView()
+        
         checkLocationServices()
         
         resultsViewController = GMSAutocompleteResultsViewController()
@@ -251,22 +253,12 @@ extension PlacesViewController: CLLocationManagerDelegate {
 }
 
 extension PlacesViewController {
+    
     func createActivityIndicatorView() {
-//        let child = ActivityIndicatorViewController()
-        
-        // add the spinner view controller
         addChild(activityIndicator)
         activityIndicator.view.frame = view.frame
         view.addSubview(activityIndicator.view)
         activityIndicator.didMove(toParent: self)
-        
-//        // wait two seconds to simulate some work happening
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            // then remove the spinner view controller
-//            child.willMove(toParent: nil)
-//            child.view.removeFromSuperview()
-//            child.removeFromParent()
-//        }
     }
     
     func removeActivityIndicator() {
