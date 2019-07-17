@@ -160,6 +160,7 @@ extension PlacesViewController {
         
         dispatchGroup.notify(queue: .main) {
             self.updateUI()
+            self.removeActivityIndicator()
         }
         
     } // end task definition

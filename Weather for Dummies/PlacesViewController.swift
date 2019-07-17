@@ -32,6 +32,8 @@ class PlacesViewController: UIViewController {
     var visibility: Double?
     var darkskyIconName: String?
     
+    let activityIndicator = ActivityIndicatorViewController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -193,6 +195,8 @@ extension PlacesViewController: GMSAutocompleteResultsViewControllerDelegate {
 
         getWeatherForPlace()
         
+        createActivityIndicatorView()
+        
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
@@ -244,4 +248,31 @@ extension PlacesViewController: CLLocationManagerDelegate {
         print("didChangeAuthorization")
         print(locationManager.location?.coordinate)
     }
+}
+
+extension PlacesViewController {
+    func createActivityIndicatorView() {
+//        let child = ActivityIndicatorViewController()
+        
+        // add the spinner view controller
+        addChild(activityIndicator)
+        activityIndicator.view.frame = view.frame
+        view.addSubview(activityIndicator.view)
+        activityIndicator.didMove(toParent: self)
+        
+//        // wait two seconds to simulate some work happening
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            // then remove the spinner view controller
+//            child.willMove(toParent: nil)
+//            child.view.removeFromSuperview()
+//            child.removeFromParent()
+//        }
+    }
+    
+    func removeActivityIndicator() {
+        activityIndicator.willMove(toParent: nil)
+        activityIndicator.view.removeFromSuperview()
+        activityIndicator.removeFromParent()
+    }
+    
 }

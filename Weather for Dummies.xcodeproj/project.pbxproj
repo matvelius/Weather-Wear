@@ -16,6 +16,7 @@
 		D748355A22CB0B6800562EDA /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D748355922CB0B6800562EDA /* PlacesViewController.swift */; };
 		D769E05C22D4123B00AF70BB /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769E05B22D4123A00AF70BB /* LoadImage.swift */; };
 		D769E05E22D4562E00AF70BB /* WhatToWear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D769E05D22D4562E00AF70BB /* WhatToWear.swift */; };
+		D770644422DE9D9200A06530 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770644322DE9D9200A06530 /* ActivityIndicator.swift */; };
 		D77180A422D6F8D300305FD3 /* URLDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77180A322D6F8D300305FD3 /* URLDataTask.swift */; };
 		D77180A622D8D1EB00305FD3 /* GetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77180A522D8D1EB00305FD3 /* GetData.swift */; };
 		D77180A822D8D25800305FD3 /* APIkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77180A722D8D25800305FD3 /* APIkeys.swift */; };
@@ -37,6 +38,7 @@
 		D748355922CB0B6800562EDA /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		D769E05B22D4123A00AF70BB /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		D769E05D22D4562E00AF70BB /* WhatToWear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToWear.swift; sourceTree = "<group>"; };
+		D770644322DE9D9200A06530 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		D77180A322D6F8D300305FD3 /* URLDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLDataTask.swift; sourceTree = "<group>"; };
 		D77180A522D8D1EB00305FD3 /* GetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetData.swift; sourceTree = "<group>"; };
 		D77180A722D8D25800305FD3 /* APIkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkeys.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				D769E05B22D4123A00AF70BB /* LoadImage.swift */,
 				D748355922CB0B6800562EDA /* PlacesViewController.swift */,
 				D77180A522D8D1EB00305FD3 /* GetData.swift */,
+				D770644322DE9D9200A06530 /* ActivityIndicator.swift */,
 				D77180A322D6F8D300305FD3 /* URLDataTask.swift */,
 				D769E05D22D4562E00AF70BB /* WhatToWear.swift */,
 				D72F455A22C912D100226C3A /* Assets.xcassets */,
@@ -239,6 +242,7 @@
 				D77180A422D6F8D300305FD3 /* URLDataTask.swift in Sources */,
 				D72F455622C912CE00226C3A /* ViewController.swift in Sources */,
 				D769E05E22D4562E00AF70BB /* WhatToWear.swift in Sources */,
+				D770644422DE9D9200A06530 /* ActivityIndicator.swift in Sources */,
 				D72F455422C912CE00226C3A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
