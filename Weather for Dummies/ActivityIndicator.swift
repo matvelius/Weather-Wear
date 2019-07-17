@@ -8,6 +8,7 @@ class ActivityIndicatorViewController: UIViewController {
         view.backgroundColor = UIColor(white: 0, alpha: 0.7)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .whiteLarge
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
         
