@@ -87,10 +87,10 @@ func evaluateWeather(
     case 0..<8:
         outputPhrase = "It is cold, "
         numberOfLayers = 3
-    case 8..<16:
+    case 8..<15:
         outputPhrase = "It is chilly, "
         numberOfLayers = 2
-    case 16..<20:
+    case 15..<20:
         outputPhrase = "It is nice out, "
         numberOfLayers = 1
     case 20..<25:
@@ -143,6 +143,8 @@ func evaluateWeather(
         // RAIN
         
         if currentPrecipType == "rain" {
+            
+            print("it's raining!")
     
             switch currentPrecipitation {
             case 0.1..<2.5:
@@ -161,9 +163,11 @@ func evaluateWeather(
         
         } else if currentPrecipType == "snow" {
             
+            print("it's snowing!")
+            
             switch currentVisibility {
             case ..<0.4:
-                middleOfPhrase = "snowing hevily, "
+                middleOfPhrase = "snowing heavily, "
             case 0.4..<0.8:
                 middleOfPhrase = "snowing, "
             case 0.8...:
@@ -178,7 +182,9 @@ func evaluateWeather(
     }
     
     // WIND
+    endOfPhrase = numberOfLayers > 1 ? "and you should wear \(numberOfLayers) layers." : "and one layer should be enough."
     
+    outputPhrase.append(endOfPhrase)
     
 }
 
