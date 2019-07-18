@@ -30,6 +30,7 @@ class PlacesViewController: UIViewController {
     var dewPoint: Double?
     var precipType: String?
     var visibility: Double?
+    var windSpeed: Double?
     var darkskyIconName: String?
     
     let activityIndicator = ActivityIndicatorViewController()

@@ -27,6 +27,7 @@ let precipitationAndHumidity = ["dry, ", "humid, ", "foggy, ", "raining, ", "pou
 
 // Sample output: "It is cold, raining, and windy. Bring a coat or an umbrella, and wear at least 3 layers."
 
+
 var middleOfPhrase = ""
 var endOfPhrase = ""
 
@@ -41,6 +42,7 @@ func evaluateWeather(
     currentDewPoint: Double?,
     currentPrecipType: String?,
     currentVisibility: Double?,
+    currentWindSpeed: Double?,
     darkskyIconName: String?
     ) {
     
@@ -52,6 +54,7 @@ func evaluateWeather(
     guard let currentPrecipitationProbability = currentPrecipProbability else { return }
     guard let currentDewPoint = currentDewPoint else { return }
     guard let currentVisibility = currentVisibility else { return }
+    guard let currentWindSpeed = currentWindSpeed else { return }
     let currentPrecipType: String = currentPrecipType ?? "n/a"
     let darkskyIconName: String = darkskyIconName ?? "clear-day"
     
@@ -65,6 +68,7 @@ func evaluateWeather(
     print("differenceBetweenCurrentTemperatureAndDewPoint: \(differenceBetweenCurrentTemperatureAndDewPoint)")
     print("currentPrecipType: \(currentPrecipType)")
     print("currentVisibility: \(currentVisibility)")
+    print("currentWindSpeed: \(currentWindSpeed)")
 
 //    let hotOrCold = ["It is extremely hot, ", "It is very hot, ", "It is hot, ", "It is pretty warm, ", "It is warm, ", "It is chilly, ", "It is cold, ", "It is very cold, ", "It is really cold, ", "It is freezing, ", "It is dangerously cold, "]
 
@@ -118,7 +122,7 @@ func evaluateWeather(
         print("something wrong with the temperature")
     }
     
-    // HUMIDITY
+    // HUMIDITY & PRECIPITATION
     
     // no precipitation, just evaluate humidity
     if currentPrecipitation == 0 && currentPrecipitationProbability < 0.1 {
@@ -181,7 +185,24 @@ func evaluateWeather(
         outputPhrase.append(middleOfPhrase)
     }
     
-    // WIND
+    // WIND SPEED
+    
+    switch currentWindSpeed {
+    case 1.6..<10:
+        outputPhrase.append("there's a breeze, ")
+    case 10..<19:
+        outputPhrase.append("it's windy, ")
+    case 19..<25:
+        outputPhrase.append("it's very windy, ")
+        numberOfLayers += 1
+    case 25...:
+        outputPhrase.append("there's a violent storm, ")
+        numberOfLayers += 1
+    default: break
+    }
+    
+    
+    // ADD NUMBER OF LAYERS AT THE END
     endOfPhrase = numberOfLayers > 1 ? "and you should wear \(numberOfLayers) layers." : "and one layer should be enough."
     
     outputPhrase.append(endOfPhrase)

@@ -126,6 +126,7 @@ extension PlacesViewController {
                     self.precipType = darkskyCurrentData[0]["precipType"] as? String
                     self.visibility = darkskyCurrentData[0]["visibility"] as? Double
                     self.darkskyIconName = darkskyCurrentData[0]["icon"] as? String
+                    self.windSpeed = darkskyCurrentData[0]["windSpeed"] as? Double
                     
                     evaluateWeather(
                         currentTemperature: self.temperature,
@@ -135,6 +136,7 @@ extension PlacesViewController {
                         currentDewPoint: self.dewPoint,
                         currentPrecipType: self.precipType,
                         currentVisibility: self.visibility,
+                        currentWindSpeed: self.windSpeed,
                         darkskyIconName: self.darkskyIconName
                     )
                     
