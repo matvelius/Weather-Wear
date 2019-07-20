@@ -47,7 +47,7 @@ extension PlacesViewController {
                 
                 if let location = apixuJSON["location"] {
                     self.locationName = location["name"] as? String
-                } else { print("unable to parse location") }
+                } else { print("unable to parse apixu location") }
                 
                 if let apixuCurrent = apixuJSON["current"] {
                     self.temperature = apixuCurrent["temp_c"] as? Double
@@ -108,9 +108,9 @@ extension PlacesViewController {
                         return
                     }
                     
-                    if let location = darkskyCurrentData[0]["location"] {
-                        self.locationName = location["name"] as? String
-                    } else { print("unable to parse location") }
+//                    if let location = darkskyCurrentData[0]["location"] {
+//                        self.locationName = location["name"] as? String
+//                    } else { print("unable to parse darksky location") }
                     
 //                    if let apixuCurrent = apixuJSON["current"] {
 //                    self.temperature = darkskyCurrentData[0]["temp_c"] as? Double
